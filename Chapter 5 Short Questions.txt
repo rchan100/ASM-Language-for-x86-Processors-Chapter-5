@@ -1,0 +1,146 @@
+==========================
+
+Section 5.8.1 problems 15, 16,17,18,19, 20
+
+==========================
+
+15. What will be the final value in EAX after these instructions execute?
+	push 5
+	push 6
+	pop eax
+	pop eax
+	
+	answer: 5
+
+====
+
+16. Which statement is true about what will happen when the example code runs?
+	 1: main PROC
+	 2: push 10
+	 3: push 20
+	 4: call Ex2Sub
+	 5: pop eax
+	 6: INVOKE ExitProcess,0
+	 7: main ENDP
+	 8:
+	 9: Ex2Sub PROC
+	10: pop eax
+	11: ret
+	12: Ex2Sub ENDP
+	
+a. EAX will equal 10 on line 6
+b. The program will halt with a runtime error on Line 10
+c. EAX will equal 20 on line 6
+d. The program will halt with a runtime error on Line 11 
+
+	answer: D
+
+====
+
+17. Which statement is true about what will happen when the example code runs?
+	 1: main PROC
+	 2: mov eax,30
+	 3: push eax
+	 4: push 40
+	 5: call Ex3Sub
+	 6: INVOKE ExitProcess,0
+	 7: main ENDP
+	 8:
+	 9: Ex3Sub PROC
+	10: pusha
+	11: mov eax,80
+	12: popa
+	13: ret
+	14: Ex3Sub ENDP
+a. EAX will equal 40 on line 6
+b. The program will halt with a runtime error on Line 6
+c. EAX will equal 30 on line 6 
+d. The program will halt with a runtime error on Line 13
+
+	answer: C
+	
+====
+
+18. Which statement is true about what will happen when the example code runs?
+	 1: main PROC
+	 2: mov eax,40
+	 3: push offset Here
+	 4: jmp Ex4Sub
+	 5: Here:
+	 6: mov eax,30
+	 7: INVOKE ExitProcess,0
+	 8: main ENDP
+	 9:
+	10: Ex4Sub PROC
+	11: ret
+	12: Ex4Sub ENDP
+a. EAX will equal 30 on line 7
+b. The program will halt with a runtime error on Line 4
+c. EAX will equal 30 on line 6 
+d. The program will halt with a runtime error on Line 11
+
+	answer: A
+	
+====	
+
+19. Which statement is true about what will happen when the example code runs?
+	 1: main PROC
+	 2: mov edx,0
+	 3: mov eax,40
+	 4: push eax
+	 5: call Ex5Sub
+	 6: INVOKE ExitProcess,0
+	 7: main ENDP
+	 8:
+	 9: Ex5Sub PROC
+	10: pop eax
+	11: pop edx
+	12: push eax
+	13: ret
+	14: Ex5Sub ENDP
+a. EDX will equal 40 on line 6 
+b. The program will halt with a runtime error on Line 13
+c. EDX will equal 0 on line 6 
+d. The program will halt with a runtime error on Line 11
+
+	answer: A
+
+====	
+
+20. What values will be written to the array when the following code executes?
+	.data
+	array DWORD 4 DUP(0)
+	
+	.code
+	main PROC
+		mov eax,10
+		mov esi,0
+		call proc_1
+		add esi,4
+		add eax,10
+		mov array[esi],eax
+		INVOKE ExitProcess,0
+	main ENDP
+	
+	proc_1 PROC
+		call proc_2
+		add esi,4
+		add eax,10
+		mov array[esi],eax
+		ret
+	proc_1 ENDP
+	
+	proc_2 PROC
+		call proc_3
+		add esi,4
+		add eax,10
+		mov array[esi],eax
+		ret
+	proc_2 ENDP
+	
+	proc_3 PROC
+		mov array[esi],eax
+		ret
+	proc_3 ENDP
+	
+	answer: array = 0Ah, 14h, 1Eh, 28h
